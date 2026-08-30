@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cream: 255, 251, 243;
+  --ink: 58, 46, 34;
+  --champagne: 214, 191, 153;
+  --coral: 228, 132, 88;
+  --bronze: 139, 109, 72;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body {
+  background: rgb(var(--cream));
+  color: rgb(var(--ink));
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(var(--coral), 0.25);
+  color: rgb(var(--ink));
+}
+
+/* ----------- Custom utilities ----------- */
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      120deg,
+      #E48458 0%,
+      #D6BF99 50%,
+      #8B6D48 100%
+    );
+  }
+
+  /* ----------- Keyword highlights ----------- */
+  .text-gradient-inline {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(120deg, #E48458 0%, #D6BF99 55%, #8B6D48 100%);
+  }
+
+  .highlight-warm {
+    @apply font-medium;
+    background: linear-gradient(to top, rgba(214, 191, 153, 0.25) 40%, transparent 40%);
+  }
+
+  .highlight-metric {
+    @apply font-mono font-bold text-coral;
+  }
+
+  .bloom-card {
+    background: rgb(250, 246, 238);
+    border: 1px solid rgba(230, 220, 204, 0.8);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bloom-card:hover {
+    border-color: rgba(214, 191, 153, 0.7);
+    box-shadow: 0 8px 30px rgba(214, 191, 153, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .bloom-card-strong {
+    background: rgb(250, 246, 238);
+    border: 1px solid rgba(214, 191, 153, 0.5);
+    box-shadow: 0 4px 16px rgba(214, 191, 153, 0.1);
+  }
+
+  .accent-strip {
+    position: relative;
+  }
+  .accent-strip::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 999px 999px 0 0;
+    background: linear-gradient(90deg, #E48458, #D6BF99);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* ----------- Scrollbar ----------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--cream));
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--champagne), 0.5);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--coral), 0.5);
+}
+
+/* ----------- Background pattern ----------- */
+.champagne-dots {
+  background-image:
+    radial-gradient(circle, rgba(214,191,153, 0.25) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ----------- Typing cursor ----------- */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.cursor-blink::after {
+  content: "▍";
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  color: rgb(var(--coral));
+}
