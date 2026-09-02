@@ -27,6 +27,13 @@ export default function Navbar() {
   const ui = t(locale);
 
   useEffect(() => {
+    // Browsers may restore the scroll position from a previous visit. On the
+    // homepage this can leave the hero hidden underneath the fixed navbar.
+    if (!window.location.hash || window.location.hash === "#profile") {
+      window.history.scrollRestoration = "manual";
+      window.requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+    }
+
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -51,7 +58,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 px-4 transition-all duration-300 ${
         scrolled ? "py-2" : "py-4"
       }`}
     >

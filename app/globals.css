@@ -22,6 +22,14 @@ body {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
 ::selection {
   background: rgba(var(--coral), 0.25);
   color: rgb(var(--ink));
