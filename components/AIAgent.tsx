@@ -5,6 +5,7 @@ import { useLanguage } from "@/lib/language-context";
 import { t, getAgentSuggestions } from "@/lib/i18n";
 import { SectionHeader } from "./NowFeed";
 import HighlightText from "./HighlightText";
+import { mockReply } from "@/lib/mock-chat";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -40,22 +41,10 @@ export default function AIAgent() {
     setInput("");
     setLoading(true);
 
-    try {
-      const r = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next }),
-      });
-      const data = (await r.json()) as { reply: string };
-      setMessages((m) => [...m, { role: "assistant", content: data.reply }]);
-    } catch (e) {
-      setMessages((m) => [
-        ...m,
-        { role: "assistant", content: ui.agentError },
-      ]);
-    } finally {
+    window.setTimeout(() => {
+      setMessages((m) => [...m, { role: "assistant", content: mockReply(content) }]);
       setLoading(false);
-    }
+    }, 450);
   };
 
   return (
